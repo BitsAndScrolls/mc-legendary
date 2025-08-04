@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta viewport="width=device-width, initial-scale=1.0">
+    <title>Mod List - Legendary Edition Wiki</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --gold-color: #f39c12;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --text-light: #ecf0f1;
+            --text-dark: #2c3e50;
+            --bg-dark: #1a1a1a;
+            --bg-medium: #2c2c2c;
+            --bg-light: #f8f9fa;
+            --shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+
+        /* Header */
+        .header {
+            background: var(--gradient);
+            color: var(--text-light);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--primary-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Filters */
+        .filters {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .filter-select, .search-input {
+            padding: 0.5rem;
+            border: 2px solid var(--bg-light);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-select:focus, .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .search-input {
+            width: 300px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin-left: auto;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Mod Categories */
+        .category-section {
+            margin-bottom: 3rem;
+        }
+
+        .category-header {
+            background: var(--primary-color);
+            color: var(--text-light);
+            padding: 1.5rem;
+            border-radius: 10px 10px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-header:hover {
+            background: #34495e;
+        }
+
+        .category-icon {
+            font-size: 1.5rem;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .category-count {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            margin-left: auto;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .category-section.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .category-content {
+            background: white;
+            border-radius: 0 0 10px 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .category-section.collapsed .category-content {
+            max-height: 0;
+        }
+
+        /* Mod Grid */
+        .mod-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .mod-card {
+            background: var(--bg-light);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mod-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .mod-card:hover::before {
+            left: 100%;
+        }
+
+        .mod-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-left-color: var(--accent-color);
+        }
+
+        .mod-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .mod-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .mod-info {
+            flex: 1;
+        }
+
+        .mod-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .mod-version {
+            font-size: 0.85rem;
+            color: #666;
+            font-family: monospace;
+            background: #f0f0f0;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            display: inline-block;
+        }
+
+        .mod-description {
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .mod-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .mod-tag {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .mod-tag.performance {
+            background: var(--success-color);
+        }
+
+        .mod-tag.content {
+            background: var(--gold-color);
+        }
+
+        .mod-tag.utility {
+            background: #3498db;
+        }
+
+        .mod-tag.magic {
+            background: #9b59b6;
+        }
+
+        .mod-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .mod-link {
+            padding: 0.5rem 1rem;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .mod-link:hover {
+            background: #34495e;
+            transform: translateY(-2px);
+        }
+
+        /* Featured Mods */
+        .featured-section {
+            margin-bottom: 3rem;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .featured-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient);
+        }
+
+        .featured-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .featured-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .featured-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .featured-highlight {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        /* Search Results */
+        .search-results {
+            margin-bottom: 2rem;
+        }
+
+        .search-info {
+            background: var(--success-color);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+
+            .stats {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+
+            .mod-grid {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .featured-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--bg-light);
+            border-top: 4px solid var(--accent-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🔮 Mod Collection</h1>
+        <p>Complete catalog of all 170+ mods in the Legendary Edition</p>
+    </header>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">
+                <strong>📚 Wiki Navigation</strong>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="getting-started.html">🚀 Getting Started</a></li>
+                <li><a href="mods.html">🔮 Mods</a></li>
+                <li><a href="skills.html">⚔️ Skills</a></li>
+                <li><a href="creatures.html">🐲 Creatures</a></li>
+                <li><a href="guides.html">📖 Guides</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Filters -->
+        <div class="filters">
+            <div class="filter-group">
+                <label for="search">🔍 Search Mods</label>
+                <input type="text" id="search" class="search-input" placeholder="Search by mod name or description...">
+            </div>
+            
+            <div class="filter-group">
+                <label for="category">📂 Category</label>
+                <select id="category" class="filter-select">
+                    <option value="all">All Categories</option>
+                    <option value="content">Content & Adventure</option>
+                    <option value="performance">Performance</option>
+                    <option value="utility">Utility & QoL</option>
+                    <option value="magic">Magic & Skills</option>
+                    <option value="visual">Visual & Audio</option>
+                </select>
+            </div>
+
+            <div class="stats">
+                <div>📦 <span id="total-mods">170+</span> Total Mods</div>
+                <div>👁️ <span id="visible-mods">170+</span> Showing</div>
+            </div>
+        </div>
+
+        <!-- Featured Mods Section -->
+        <section class="featured-section">
+            <h2 style="color: var(--primary-color); margin-bottom: 2rem; font-size: 2rem;">⭐ Featured Mods</h2>
+            <div class="featured-grid">
+                <div class="featured-card">
+                    <span class="featured-icon">🐉</span>
+                    <h3 class="featured-title">Ice and Fire: Dragons</h3>
+                    <p class="featured-description">The centerpiece mod that adds Fire, Ice, and Lightning dragons to your world. Hunt them, tame them, or flee from them - the choice is yours.</p>
+                    <div class="featured-highlight">
+                        <strong>Key Features:</strong> 3 dragon types, dragon taming, dragon armor, mythical creatures, dragon caves
+                    </div>
+                </div>
+
+                <div class="featured-card">
+                    <span class="featured-icon">⚔️</span>
+                    <h3 class="featured-title">Iron's Spells 'n Spellbooks</h3>
+                    <p class="featured-description">Comprehensive magic system with 80+ spells across multiple schools of magic. Master the arcane arts and become a powerful wizard.</p>
+                    <div class="featured-highlight">
+                        <strong>Key Features:</strong> 80+ spells, magic schools, spell progression, magical armor, wizard towers
+                    </div>
+                </div>
+
+                <div class="featured-card">
+                    <span class="featured-icon">🏰</span>
+                    <h3 class="featured-title">When Dungeons Arise</h3>
+                    <p class="featured-description">Massive, beautifully crafted dungeon complexes that will challenge even the most prepared adventurers.</p>
+                    <div class="featured-highlight">
+                        <strong>Key Features:</strong> Giant dungeons, epic loot, challenging encounters, stunning architecture
+                    </div>
+                </div>
+
+                <div class="featured-card">
+                    <span class="featured-icon">📈</span>
+                    <h3 class="featured-title">Reskillable</h3>
+                    <p class="featured-description">RPG-style skill system that locks equipment behind skill levels, adding meaningful progression to your adventure.</p>
+                    <div class="featured-highlight">
+                        <strong>Key Features:</strong> 8 skill trees, equipment gating, XP-based progression, trait unlocks
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content & Adventure Mods -->
+        <div class="category-section">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <span class="category-icon">🗺️</span>
+                <span class="category-title">Content & Adventure</span>
+                <span class="category-count">45+</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="category-content">
+                <div class="mod-grid">
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">🐉</span>
+                            <div class="mod-info">
+                                <div class="mod-name">Ice and Fire: Dragons</div>
+                                <div class="mod-version">v2.1.13-1.20.1-beta-5</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Adds Fire, Ice, and Lightning dragons along with many other mythical creatures. Features dragon taming, riding, and equipment crafting.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag content">Adventure</span>
+                            <span class="mod-tag">Dragons</span>
+                            <span class="mod-tag">Creatures</span>
+                        </div>
+                    </div>
+
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">👹</span>
+                            <div class="mod-info">
+                                <div class="mod-name">Legendary Creatures</div>
+                                <div class="mod-version">v1.0.16</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Adds aggressive creatures like Scarecrows, Hounds, and Wisps that make the world more challenging and dangerous.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag content">Creatures</span>
+                            <span class="mod-tag">Challenge</span>
+                        </div>
+                    </div>
+
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">🏰</span>
+                            <div class="mod-info">
+                                <div class="mod-name">When Dungeons Arise</div>
+                                <div class="mod-version">v2.1.58</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Massive dungeon complexes with challenging encounters and epic loot. Features dozens of unique structures.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag content">Dungeons</span>
+                            <span class="mod-tag">Structures</span>
+                        </div>
+                    </div>
+
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">🪦</span>
+                            <div class="mod-info">
+                                <div class="mod-name">The Graveyard</div>
+                                <div class="mod-version">v3.1</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Spooky graveyards with undead creatures, cursed items, and atmospheric horror elements.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag content">Horror</span>
+                            <span class="mod-tag">Undead</span>
+                        </div>
+                    </div>
+
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">🌊</span>
+                            <div class="mod-info">
+                                <div class="mod-name">Aquamirae</div>
+                                <div class="mod-version">v6.API15</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Ocean-themed content with sea creatures, underwater structures, and aquatic adventures.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag content">Ocean</span>
+                            <span class="mod-tag">Creatures</span>
+                        </div>
+                    </div>
+
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">🌿</span>
+                            <div class="mod-info">
+                                <div class="mod-name">Biomes O' Plenty</div>
+                                <div class="mod-version">v19.0.0.96</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Adds 75+ new biomes to explore, each with unique blocks, plants, and atmospheric features.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag content">Biomes</span>
+                            <span class="mod-tag">World Gen</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Magic & Skills Mods -->
+        <div class="category-section">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <span class="category-icon">🔮</span>
+                <span class="category-title">Magic & Skills</span>
+                <span class="category-count">15+</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="category-content">
+                <div class="mod-grid">
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">📚</span>
+                            <div class="mod-info">
+                                <div class="mod-name">Iron's Spells 'n Spellbooks</div>
+                                <div class="mod-version">v3.4.0.9</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Comprehensive magic system with 80+ spells across multiple schools. Features spell progression, magical equipment, and wizard towers.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag magic">Magic</span>
+                            <span class="mod-tag">Spells</span>
+                            <span class="mod-tag">RPG</span>
+                        </div>
+                    </div>
+
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">📈</span>
+                            <div class="mod-info">
+                                <div class="mod-name">Reskillable</div>
+                                <div class="mod-version">v3.2.5</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            RPG-style skill system with 8 different skills. Level up to unlock better equipment and abilities.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag magic">Skills</span>
+                            <span class="mod-tag">RPG</span>
+                            <span class="mod-tag">Progression</span>
+                        </div>
+                    </div>
+
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">🗡️</span>
+                            <div class="mod-info">
+                                <div class="mod-name">Relics</div>
+                                <div class="mod-version">v0.8.0.9</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Powerful magical artifacts with unique abilities. Find, research, and use these legendary items.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag magic">Artifacts</span>
+                            <span class="mod-tag">Unique Items</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Mods -->
+        <div class="category-section">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <span class="category-icon">⚡</span>
+                <span class="category-title">Performance & Optimization</span>
+                <span class="category-count">20+</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="category-content">
+                <div class="mod-grid">
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">💎</span>
+                            <div class="mod-info">
+                                <div class="mod-name">Embeddium</div>
+                                <div class="mod-version">v0.3.31</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Advanced rendering optimization mod (Sodium port for Forge). Dramatically improves FPS and reduces stuttering.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag performance">Performance</span>
+                            <span class="mod-tag">Rendering</span>
+                        </div>
+                    </div>
+
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">🔧</span>
+                            <div class="mod-info">
+                                <div class="mod-name">ModernFix</div>
+                                <div class="mod-version">v5.23.0</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Collection of performance improvements and bug fixes for modern Minecraft versions.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag performance">Performance</span>
+                            <span class="mod-tag">Bug Fixes</span>
+                        </div>
+                    </div>
+
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">👻</span>
+                            <div class="mod-info">
+                                <div class="mod-name">Entity Culling</div>
+                                <div class="mod-version">v1.7.4</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Skips rendering entities that are not visible, improving performance in areas with many mobs.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag performance">Performance</span>
+                            <span class="mod-tag">Entities</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Utility & QoL Mods -->
+        <div class="category-section">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <span class="category-icon">🛠️</span>
+                <span class="category-title">Utility & Quality of Life</span>
+                <span class="category-count">35+</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="category-content">
+                <div class="mod-grid">
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">📋</span>
+                            <div class="mod-info">
+                                <div class="mod-name">JEI (Just Enough Items)</div>
+                                <div class="mod-version">v15.20.0.106</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Essential recipe viewer and item search mod. Press R to see recipes, U to see uses.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag utility">Utility</span>
+                            <span class="mod-tag">Recipes</span>
+                        </div>
+                    </div>
+
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">🎒</span>
+                            <div class="mod-info">
+                                <div class="mod-name">Sophisticated Backpacks</div>
+                                <div class="mod-version">v3.0.0-beta.9</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Advanced backpack system with upgrades, auto-sorting, and portable storage solutions.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag utility">Storage</span>
+                            <span class="mod-tag">Portable</span>
+                        </div>
+                    </div>
+
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">🗺️</span>
+                            <div class="mod-info">
+                                <div class="mod-name">Map Atlases</div>
+                                <div class="mod-version">v6.0.16</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Combine maps into atlases for better world navigation and exploration tracking.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag utility">Navigation</span>
+                            <span class="mod-tag">Maps</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visual & Audio Mods -->
+        <div class="category-section">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <span class="category-icon">🎨</span>
+                <span class="category-title">Visual & Audio</span>
+                <span class="category-count">25+</span>
+                <span class="toggle-icon">▼</span>
+            </div>
+            <div class="category-content">
+                <div class="mod-grid">
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">🌊</span>
+                            <div class="mod-info">
+                                <div class="mod-name">Dynamic Surroundings</div>
+                                <div class="mod-version">v0.3.3</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Enhanced environmental audio and visual effects. Adds atmospheric sounds and particle effects.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag">Audio</span>
+                            <span class="mod-tag">Atmosphere</span>
+                        </div>
+                    </div>
+
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">🎵</span>
+                            <div class="mod-info">
+                                <div class="mod-name">Ambient Sounds</div>
+                                <div class="mod-version">v6.1.10</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Immersive environmental sounds that change based on your surroundings and weather.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag">Audio</span>
+                            <span class="mod-tag">Immersion</span>
+                        </div>
+                    </div>
+
+                    <div class="mod-card">
+                        <div class="mod-header">
+                            <span class="mod-icon">🌧️</span>
+                            <div class="mod-info">
+                                <div class="mod-name">Pretty Rain</div>
+                                <div class="mod-version">v1.1.3</div>
+                            </div>
+                        </div>
+                        <div class="mod-description">
+                            Enhanced rain effects with better particle systems and atmospheric improvements.
+                        </div>
+                        <div class="mod-tags">
+                            <span class="mod-tag">Visual</span>
+                            <span class="mod-tag">Weather</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('search');
+        const categorySelect = document.getElementById('category');
+        const totalModsSpan = document.getElementById('total-mods');
+        const visibleModsSpan = document.getElementById('visible-mods');
+
+        function filterMods() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedCategory = categorySelect.value;
+            const modCards = document.querySelectorAll('.mod-card');
+            let visibleCount = 0;
+
+            modCards.forEach(card => {
+                const modName = card.querySelector('.mod-name').textContent.toLowerCase();
+                const modDescription = card.querySelector('.mod-description').textContent.toLowerCase();
+                const modTags = Array.from(card.querySelectorAll('.mod-tag')).map(tag => tag.textContent.toLowerCase());
+                
+                const matchesSearch = searchTerm === '' || 
+                    modName.includes(searchTerm) || 
+                    modDescription.includes(searchTerm) ||
+                    modTags.some(tag => tag.includes(searchTerm));
+
+                const categoryMatch = selectedCategory === 'all' || 
+                    modTags.some(tag => {
+                        switch(selectedCategory) {
+                            case 'content': return ['adventure', 'creatures', 'dungeons', 'structures', 'biomes'].some(cat => tag.includes(cat));
+                            case 'performance': return tag.includes('performance');
+                            case 'utility': return ['utility', 'storage', 'navigation', 'recipes'].some(cat => tag.includes(cat));
+                            case 'magic': return ['magic', 'spells', 'skills', 'rpg'].some(cat => tag.includes(cat));
+                            case 'visual': return ['audio', 'visual', 'atmosphere', 'immersion'].some(cat => tag.includes(cat));
+                            default: return true;
+                        }
+                    });
+
+                if (matchesSearch && categoryMatch) {
+                    card.style.display = 'block';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            visibleModsSpan.textContent = visibleCount;
+            
+            // Update category visibility
+            document.querySelectorAll('.category-section').forEach(section => {
+                const visibleCards = section.querySelectorAll('.mod-card[style="display: block;"], .mod-card:not([style*="display: none"])').length;
+                const countSpan = section.querySelector('.category-count');
+                if (countSpan) {
+                    countSpan.textContent = visibleCards;
+                }
+                
+                if (visibleCards === 0) {
+                    section.style.display = 'none';
+                } else {
+                    section.style.display = 'block';
+                }
+            });
+        }
+
+        // Toggle category sections
+        function toggleCategory(header) {
+            const section = header.parentElement;
+            const icon = header.querySelector('.toggle-icon');
+            
+            section.classList.toggle('collapsed');
+            icon.style.transform = section.classList.contains('collapsed') ? 'rotate(-90deg)' : 'rotate(0deg)';
+        }
+
+        // Event listeners
+        searchInput.addEventListener('input', filterMods);
+        categorySelect.addEventListener('change', filterMods);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            filterMods();
+            
+            // Smooth scrolling for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Focus search with Ctrl+F
+            if (e.ctrlKey && e.key === 'f') {
+                e.preventDefault();
+                searchInput.focus();
+            }
+            
+            // Clear search with Escape
+            if (e.key === 'Escape' && document.activeElement === searchInput) {
+                searchInput.value = '';
+                filterMods();
+            }
+        });
+
+        // Add loading animation for dynamic content
+        function showLoading(container) {
+            container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+        }
+
+        // Intersection Observer for lazy loading animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all mod cards for animations
+        document.querySelectorAll('.mod-card, .featured-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
