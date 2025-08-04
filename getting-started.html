@@ -135,10 +135,15 @@
             border-left: 3px solid transparent;
         }
 
-        .toc a:hover {
+        .toc a:hover, .toc a.active {
             background: var(--bg-light);
             border-left-color: var(--accent-color);
             transform: translateX(5px);
+        }
+
+        .toc a.active {
+            background: var(--accent-color);
+            color: white;
         }
 
         /* Main Content */
@@ -277,4 +282,637 @@
         }
 
         .step {
-            counter-increment
+            counter-increment: step-counter;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: -2rem;
+            top: 1.5rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .step h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        /* Tabs */
+        .tabs {
+            margin: 2rem 0;
+        }
+
+        .tab-buttons {
+            display: flex;
+            border-bottom: 2px solid var(--bg-light);
+            margin-bottom: 1rem;
+        }
+
+        .tab-button {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            color: var(--text-dark);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button.active {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+            background: rgba(231, 76, 60, 0.1);
+        }
+
+        .tab-button:hover {
+            background: var(--bg-light);
+        }
+
+        .tab-content {
+            display: none;
+            padding: 2rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .sidebar {
+                position: static;
+                order: 2;
+            }
+
+            .main-content {
+                padding: 2rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .tab-buttons {
+                flex-wrap: wrap;
+            }
+
+            .step::before {
+                position: relative;
+                left: 0;
+                margin-bottom: 1rem;
+            }
+
+            .step {
+                padding-left: 1.5rem;
+                border-left: none;
+                border-top: 4px solid var(--accent-color);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🚀 Getting Started</h1>
+        <p>Your complete guide to surviving and thriving in the Legendary Edition</p>
+    </header>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">
+                <strong>📚 Wiki Navigation</strong>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="getting-started.html">🚀 Getting Started</a></li>
+                <li><a href="mods.html">🔮 Mods</a></li>
+                <li><a href="skills.html">⚔️ Skills</a></li>
+                <li><a href="creatures.html">🐲 Creatures</a></li>
+                <li><a href="guides.html">📖 Guides</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>📋 Table of Contents</h3>
+            <ul class="toc">
+                <li><a href="#installation">💾 Installation</a></li>
+                <li><a href="#first-steps">👶 First Steps</a></li>
+                <li><a href="#survival-tips">🛡️ Survival Tips</a></li>
+                <li><a href="#skill-system">📈 Skill System</a></li>
+                <li><a href="#progression">🎯 Progression Path</a></li>
+                <li><a href="#builds">⚔️ Starting Builds</a></li>
+                <li><a href="#dangers">⚠️ Major Dangers</a></li>
+                <li><a href="#tips">💡 Pro Tips</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <h1>Getting Started with Legendary Edition</h1>
+            
+            <div class="alert alert-warning">
+                <strong>⚠️ Important Notice:</strong> This modpack significantly increases Minecraft's difficulty. Dragons, legendary creatures, and enhanced survival mechanics make this a challenging experience even for veteran players.
+            </div>
+
+            <section id="installation">
+                <h2>💾 Installation</h2>
+                
+                <div class="tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" onclick="showTab('curseforge')">CurseForge</button>
+                        <button class="tab-button" onclick="showTab('manual')">Manual Install</button>
+                        <button class="tab-button" onclick="showTab('requirements')">Requirements</button>
+                    </div>
+                    
+                    <div id="curseforge" class="tab-content active">
+                        <h3>CurseForge Installation</h3>
+                        <div class="steps">
+                            <div class="step">
+                                <h4>Download CurseForge App</h4>
+                                <p>Download and install the CurseForge app from <a href="https://www.curseforge.com/download/app" target="_blank">curseforge.com</a></p>
+                            </div>
+                            <div class="step">
+                                <h4>Import Modpack</h4>
+                                <p>Click "Create Custom Profile" and import the Legendary Edition modpack file (.zip)</p>
+                            </div>
+                            <div class="step">
+                                <h4>Allocate RAM</h4>
+                                <p>Set memory allocation to at least 6GB (8GB recommended) in the profile settings</p>
+                            </div>
+                            <div class="step">
+                                <h4>Launch & Play</h4>
+                                <p>Click Play and wait for the initial mod loading process to complete</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="manual" class="tab-content">
+                        <h3>Manual Installation</h3>
+                        <div class="code-block">
+1. Install Minecraft Forge 1.20.1 (version 47.2.0 or higher)
+2. Download all mod files from the provided list
+3. Place all .jar files in your mods folder
+4. Launch Minecraft with Forge profile
+5. Configure as needed
+                        </div>
+                        <div class="alert alert-danger">
+                            <strong>🚨 Warning:</strong> Manual installation is complex and error-prone. We strongly recommend using a modpack launcher.
+                        </div>
+                    </div>
+                    
+                    <div id="requirements" class="tab-content">
+                        <h3>System Requirements</h3>
+                        <div class="card-grid">
+                            <div class="card">
+                                <span class="card-icon">💻</span>
+                                <h4>Minimum</h4>
+                                <ul>
+                                    <li>6GB RAM allocated to Minecraft</li>
+                                    <li>Intel i5 or AMD Ryzen 5</li>
+                                    <li>GTX 1060 / RX 580</li>
+                                    <li>Java 17 or higher</li>
+                                </ul>
+                            </div>
+                            <div class="card">
+                                <span class="card-icon">🚀</span>
+                                <h4>Recommended</h4>
+                                <ul>
+                                    <li>8-12GB RAM allocated</li>
+                                    <li>Intel i7 or AMD Ryzen 7</li>
+                                    <li>GTX 3060 / RX 6600</li>
+                                    <li>SSD storage</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="first-steps">
+                <h2>👶 Your First Steps</h2>
+                
+                <div class="alert alert-info">
+                    <strong>💡 Tip:</strong> Press 'G' to open your skill menu and 'K' to view all keybindings when you first spawn.
+                </div>
+
+                <h3>Immediate Priorities (First 10 Minutes)</h3>
+                <div class="steps">
+                    <div class="step">
+                        <h4>Check Your Skills</h4>
+                        <p>Open the skill menu (G key) and understand that you're limited by your skill levels. You can't use most tools/weapons until you level up!</p>
+                    </div>
+                    <div class="step">
+                        <h4>Gather Basic Resources</h4>
+                        <p>Punch trees and gather wood. This gives you Gathering XP which is essential for progression.</p>
+                    </div>
+                    <div class="step">
+                        <h4>Craft Wooden Tools</h4>
+                        <p>Make wooden tools immediately - they have no skill requirements and you'll need them to start mining.</p>
+                    </div>
+                    <div class="step">
+                        <h4>Find Shelter</h4>
+                        <p>Night is much more dangerous with aggressive creatures. Find or dig a temporary shelter before dark.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="survival-tips">
+                <h2>🛡️ Essential Survival Tips</h2>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <span class="card-icon">🌙</span>
+                        <h4>Night Safety</h4>
+                        <p>Many new aggressive mobs spawn at night. Stay underground or in a well-lit, enclosed area until you have proper equipment.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <span class="card-icon">🏃</span>
+                        <h4>Retreat Strategy</h4>
+                        <p>Always carry blocks for emergency shelters and food for healing. Running away is often the best strategy early game.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <span class="card-icon">🗺️</span>
+                        <h4>Avoid Danger Zones</h4>
+                        <p>Stay away from large structures, dragon roosts, and areas with ominous sounds until you're properly equipped.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <span class="card-icon">📚</span>
+                        <h4>Read Everything</h4>
+                        <p>Find manuscripts in structures and craft a bestiary to learn about creatures. Knowledge is survival.</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-danger">
+                    <strong>🚨 Major Threats to Avoid Early Game:</strong>
+                    <ul>
+                        <li><strong>Dragon Roosts:</strong> Large structures with dragons - instant death for new players</li>
+                        <li><strong>Legendary Creatures:</strong> Scarecrows appear when breaking crops, Hounds in forests</li>
+                        <li><strong>Large Dungeons:</strong> Wait until you have iron+ gear before exploring</li>
+                        <li><strong>The Graveyard Structures:</strong> Cursed areas with powerful undead</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="skill-system">
+                <h2>📈 Understanding the Skill System</h2>
+                
+                <p>The Reskillable mod locks equipment and abilities behind 8 different skills. You must spend XP to level these skills up.</p>
+
+                <h3>The 8 Skills</h3>
+                <div class="card-grid">
+                    <div class="card">
+                        <span class="card-icon">⛏️</span>
+                        <h4>Mining</h4>
+                        <p>Unlocks pickaxes and mining tools. Level 8 = Iron Pickaxe, Level 16 = Diamond Pickaxe</p>
+                    </div>
+                    
+                    <div class="card">
+                        <span class="card-icon">🛡️</span>
+                        <h4>Defense</h4>
+                        <p>Unlocks armor. Level 12 = Iron Armor, Level 16 = Diamond Armor</p>
+                    </div>
+                    
+                    <div class="card">
+                        <span class="card-icon">⚔️</span>
+                        <h4>Attack</h4>
+                        <p>Unlocks weapons including Spartan Weaponry items. Essential for combat builds.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <span class="card-icon">🔮</span>
+                        <h4>Magic</h4>
+                        <p>Unlocks magical items and spellcasting equipment. Level 12 = Enchanting Table</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>✅ XP Efficiency Tips:</strong>
+                    <ul>
+                        <li><strong>Mining XP:</strong> Strip mine and break lots of stone blocks</li>
+                        <li><strong>Attack XP:</strong> Fight mobs with weapons (not fists)</li>
+                        <li><strong>Defense XP:</strong> Take damage while wearing armor</li>
+                        <li><strong>Magic XP:</strong> Cast spells and use magical items</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="progression">
+                <h2>🎯 Recommended Progression Path</h2>
+                
+                <h3>Days 1-3: Foundation Phase</h3>
+                <ul>
+                    <li>Focus <strong>entirely on Mining</strong> until level 8 (Iron Pickaxe)</li>
+                    <li>Build basic shelter and gather resources</li>
+                    <li>Avoid all dangerous areas and creatures</li>
+                    <li>Craft wooden then stone tools as permitted</li>
+                </ul>
+
+                <h3>Days 4-7: Equipment Phase</h3>
+                <ul>
+                    <li>Level <strong>Defense to 12</strong> for iron armor</li>
+                    <li>Level <strong>Attack to 8</strong> for better weapons</li>
+                    <li>Continue mining for iron and materials</li>
+                    <li>Explore small structures cautiously</li>
+                </ul>
+
+                <h3>Days 8-14: Specialization Phase</h3>
+                <ul>
+                    <li>Choose your build focus (Combat/Magic/Balanced)</li>
+                    <li>Push toward diamond-tier equipment (level 16)</li>
+                    <li>Start tackling enhanced dungeons</li>
+                    <li>Begin magic studies if going magic route</li>
+                </ul>
+
+                <h3>Days 15+: Advanced Phase</h3>
+                <ul>
+                    <li>Hunt legendary creatures with proper gear</li>
+                    <li>Explore major dungeon complexes</li>
+                    <li>Begin dragon hunting preparation</li>
+                    <li>Master your chosen specialization</li>
+                </ul>
+            </section>
+
+            <section id="builds">
+                <h2>⚔️ Recommended Starting Builds</h2>
+                
+                <div class="tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" onclick="showTab('survival')">🛡️ Survival</button>
+                        <button class="tab-button" onclick="showTab('magic')">🔮 Magic</button>
+                        <button class="tab-button" onclick="showTab('combat')">⚔️ Combat</button>
+                        <button class="tab-button" onclick="showTab('balanced')">⚖️ Balanced</button>
+                    </div>
+                    
+                    <div id="survival" class="tab-content active">
+                        <h3>🛡️ Survival Focus Build (Recommended for Beginners)</h3>
+                        <p><strong>Priority Order:</strong></p>
+                        <ol>
+                            <li><strong>Mining (1-16):</strong> Essential for resource gathering</li>
+                            <li><strong>Defense (1-12):</strong> Critical for survival</li>
+                            <li><strong>Attack (1-10):</strong> Basic combat capability</li>
+                            <li><strong>Gathering (1-8):</strong> Better tools and efficiency</li>
+                        </ol>
+                        <p><strong>Best for:</strong> New players, those wanting steady progression</p>
+                    </div>
+                    
+                    <div id="magic" class="tab-content">
+                        <h3>🔮 Magic Specialist Build</h3>
+                        <p><strong>Priority Order:</strong></p>
+                        <ol>
+                            <li><strong>Magic (1-15):</strong> Unlock spellcasting</li>
+                            <li><strong>Defense (1-10):</strong> Survival necessity</li>
+                            <li><strong>Attack (1-6):</strong> Emergency weapons</li>
+                            <li><strong>Mining (1-10):</strong> Basic resources</li>
+                        </ol>
+                        <p><strong>Best for:</strong> Players who want to focus on Iron's Spellbooks magic system</p>
+                    </div>
+                    
+                    <div id="combat" class="tab-content">
+                        <h3>⚔️ Combat Specialist Build</h3>
+                        <p><strong>Priority Order:</strong></p>
+                        <ol>
+                            <li><strong>Attack (1-20):</strong> Unlock all weapons</li>
+                            <li><strong>Defense (1-16):</strong> Maximum protection</li>
+                            <li><strong>Mining (1-12):</strong> Diamond gear crafting</li>
+                            <li><strong>Magic (1-8):</strong> Basic enchanting</li>
+                        </ol>
+                        <p><strong>Best for:</strong> Dragon hunters, PvP players, those wanting to tackle legendary creatures</p>
+                    </div>
+                    
+                    <div id="balanced" class="tab-content">
+                        <h3>⚖️ Balanced Explorer Build</h3>
+                        <p><strong>Strategy:</strong> Level all skills to 8 first, then focus on Mining → Defense → Attack → Magic</p>
+                        <p><strong>Best for:</strong> Experienced players who want flexibility and slower but steady progression</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="dangers">
+                <h2>⚠️ Major Dangers to Know</h2>
+                
+                <div class="alert alert-danger">
+                    <strong>🚨 Immediate Threats:</strong> These can kill you instantly if unprepared
+                </div>
+
+                <div class="card-grid">
+                    <div class="card">
+                        <span class="card-icon">🐉</span>
+                        <h4>Dragons (Ice & Fire)</h4>
+                        <ul>
+                            <li>Fire Dragons: Breathe fire, found in most biomes</li>
+                            <li>Ice Dragons: Freeze attacks, found in cold areas</li>
+                            <li>Lightning Dragons: Electrical attacks, nocturnal</li>
+                            <li><strong>Avoid completely until late game!</strong></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <span class="card-icon">👹</span>
+                        <h4>Legendary Creatures</h4>
+                        <ul>
+                            <li>Scarecrows: Appear when breaking crops</li>
+                            <li>Hounds: Forest creatures that immobilize</li>
+                            <li>Desert/Forest Mojos: Spawn from plants</li>
+                            <li>Scorpions: Poison damage in deserts</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <span class="card-icon">🏰</span>
+                        <h4>Legendary Monsters</h4>
+                        <ul>
+                            <li>9 boss-type creatures with unique lairs</li>
+                            <li>Found in special structures</li>
+                            <li>Drop powerful unique weapons</li>
+                            <li>Require endgame preparation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <span class="card-icon">🪦</span>
+                        <h4>Graveyard Structures</h4>
+                        <ul>
+                            <li>Cursed areas with undead</li>
+                            <li>Powerful enemies and traps</li>
+                            <li>Great loot but extreme danger</li>
+                            <li>Avoid until well-equipped</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tips">
+                <h2>💡 Pro Tips for Success</h2>
+                
+                <div class="card-grid">
+                    <div class="card">
+                        <span class="card-icon">📖</span>
+                        <h4>Knowledge is Power</h4>
+                        <ul>
+                            <li>Craft and read the Bestiary</li>
+                            <li>Use JEI (Just Enough Items) for recipes</li>
+                            <li>Check FTB Quests for guided progression</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <span class="card-icon">🎒</span>
+                        <h4>Always Carry</h4>
+                        <ul>
+                            <li>Food for healing</li>
+                            <li>Blocks for emergency shelter</li>
+                            <li>Torches for lighting</li>
+                            <li>Basic tools for gathering</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <span class="card-icon">💰</span>
+                        <h4>Resource Management</h4>
+                        <ul>
+                            <li>Don't hoard XP - spend it immediately</li>
+                            <li>Focus on 2-3 skills maximum early game</li>
+                            <li>Iron gear is your first major milestone</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <span class="card-icon">🏃</span>
+                        <h4>Combat Strategy</h4>
+                        <ul>
+                            <li>Running away is often the best option</li>
+                            <li>Use terrain to your advantage</li>
+                            <li>Craft Spartan weapons for reach advantage</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>🎯 Remember:</strong> This modpack is about patience and progression. Take your time, prepare thoroughly, and don't rush into dangerous situations. The rewards are worth the careful approach!
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(button => button.classList.remove('active'));
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight current section in TOC
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const tocLinks = document.querySelectorAll('.toc a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
