@@ -1,0 +1,1904 @@
+                                <li>Bow (Power V, Infinity)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="creature-card">
+                        <div class="creature-tips">
+                            <h5>💡 Recommended Spells</h5>
+                            <ul>
+                                <li>Fireball (ranged damage)</li>
+                                <li>Shield (damage reduction)</li>
+                                <li>Heal (sustainability)</li>
+                                <li>Lightning Bolt (high damage)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-warning">
+                    <strong>⚠️ Important Reminders:</strong><br>
+                    • Never fight legendary creatures without proper preparation<br>
+                    • Always have an escape plan before engaging<br>
+                    • Carry multiple healing items and backup equipment<br>
+                    • Learn creature patterns before attempting solo fights<br>
+                    • Some creatures are meant for late-game progression only
+                </div>
+
+                <div class="alert alert-info">
+                    <strong>🎯 Progression Recommendations:</strong><br>
+                    • <strong>Early Game (Days 1-10):</strong> Avoid all legendary creatures<br>
+                    • <strong>Mid Game (Days 10-20):</strong> Fight Wisps and weaker legendary creatures with iron gear<br>
+                    • <strong>Late Game (Days 20-30):</strong> Tackle legendary monsters with diamond gear and enchantments<br>
+                    • <strong>End Game (Day 30+):</strong> Dragon hunting and boss monster raids with full preparation
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('search');
+        const difficultySelect = document.getElementById('difficulty');
+        const typeSelect = document.getElementById('type');
+
+        function filterCreatures() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const selectedDifficulty = difficultySelect.value;
+            const selectedType = typeSelect.value;
+            const creatureCards = document.querySelectorAll('.creature-card[data-difficulty]');
+
+            creatureCards.forEach(card => {
+                const cardDifficulty = card.getAttribute('data-difficulty');
+                const cardType = card.getAttribute('data-type');
+                const cardName = card.querySelector('.creature-name').textContent.toLowerCase();
+                const cardDescription = card.querySelector('.creature-description').textContent.toLowerCase();
+
+                const matchesSearch = searchTerm === '' || 
+                    cardName.includes(searchTerm) || 
+                    cardDescription.includes(searchTerm);
+
+                const matchesDifficulty = selectedDifficulty === 'all' || 
+                    cardDifficulty === selectedDifficulty;
+
+                const matchesType = selectedType === 'all' || 
+                    cardType === selectedType;
+
+                if (matchesSearch && matchesDifficulty && matchesType) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Event listeners
+        searchInput.addEventListener('input', filterCreatures);
+        difficultySelect.addEventListener('change', filterCreatures);
+        typeSelect.addEventListener('change', filterCreatures);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight current section in TOC
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const tocLinks = document.querySelectorAll('.toc a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all creature cards
+        document.querySelectorAll('.creature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Add hover effects for creature cards
+        document.querySelectorAll('.creature-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Initialize filters
+        document.addEventListener('DOMContentLoaded', () => {
+            filterCreatures();
+        });
+    </script>
+</body>
+</html> class="creature-header">
+                            <div class="creature-icon">🏃</div>
+                            <div class="creature-info">
+                                <div class="creature-name">Mobility & Positioning</div>
+                                <div class="creature-type">Movement Tactics</div>
+                            </div>
+                        </div>
+                        
+                        <div class="creature-description">
+                            Use superior positioning and movement to gain tactical advantages in combat.
+                        </div>
+
+                        <div class="creature-abilities">
+                            <h4>🏃 Movement Tactics</h4>
+                            <ul class="ability-list">
+                                <li>Use high ground when possible</li>
+                                <li>Build temporary barriers during combat</li>
+                                <li>Use water to control dragon breath</li>
+                                <li>Create chokepoints in structures</li>
+                                <li>Maintain escape routes at all times</li>
+                                <li>Use pillaring to avoid ground mobs</li>
+                            </ul>
+                        </div>
+
+                        <div class="creature-tips">
+                            <h5>💡 Essential Items</h5>
+                            <ul>
+                                <li>Building blocks (64+ stack)</li>
+                                <li>Ender Pearls (emergency escape)</li>
+                                <li>Elytra (late game mobility)</li>
+                                <li>Speed Potions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="creature-card">
+                        <div class="creature-header">
+                            <div class="creature-icon">🔮</div>
+                            <div class="creature-info">
+                                <div class="creature-name">Magic Combat</div>
+                                <div class="creature-type">Spellcaster Tactics</div>
+                            </div>
+                        </div>
+                        
+                        <div class="creature-description">
+                            Leverage Iron's Spellbooks magic system for powerful combat advantages.
+                        </div>
+
+                        <div class="creature-abilities">
+                            <h4>🔮 Magic Tactics</h4>
+                            <ul class="ability-list">
+                                <li>Use elemental advantages (fire vs ice)</li>
+                                <li>Cast protection spells before combat</li>
+                                <li>Use area-of-effect spells for groups</li>
+                                <li>Combine spells with weapon attacks</li>
+                                <li>Manage mana carefully during fights</li>
+                                <li>Use healing spells for sustainability</li>
+                            </ul>
+                        </div>
+
+                        <div                                <li>Enchant with Protection IV</li>
+                                <li>Use shields for blocking attacks</li>
+                                <li>Carry emergency ender pearls</li>
+                                <li>Build escape routes and safe rooms</li>
+                                <li>Keep golden apples for emergencies</li>
+                            </ul>
+                        </div>
+
+                        <div class="creature-tips">
+                            <h5>💡 Key Items</h5>
+                            <ul>
+                                <li>Shield with Unbreaking III</li>
+                                <li>Totem of Undying</li>
+                                <li>Fire Resistance Potions (dragons)</li>
+                                <li>Healing Potions (multiple)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="creature-card">
+                        <div class="creature-header">
+                            <div class="creature-icon">⚔️</div>
+                            <div class="creature-info">
+                                <div class="creature-name">Offensive Strategies</div>
+                                <div class="creature-type">Combat Tactics</div>
+                            </div>
+                        </div>
+                        
+                        <div class="creature-description">
+                            Maximize damage output while maintaining safety margins during combat.
+                        </div>
+
+                        <div class="creature-abilities">
+                            <h4>⚔️ Attack Tactics</h4>
+                            <ul class="ability-list">
+                                <li>Use Spartan Weaponry for reach advantage</li>
+                                <li>Enchant weapons with Sharpness V</li>
+                                <li>Bring multiple weapons for durability</li>
+                                <li>Use crossbows for ranged combat</li>
+                                <li>Learn attack patterns and timing</li>
+                                <li>Exploit terrain advantages</li>
+                            </ul>
+                        </div>
+
+                        <div class="creature-tips">
+                            <h5>💡 Recommended Weapons</h5>
+                            <ul>
+                                <li>Diamond/Netherite Sword (Sharpness V)</li>
+                                <li>Spartan Spear (extra reach)</li>
+                                <li>Crossbow (Quick Charge III)</li>
+                                <li>Bow                                <li>Trident with loyalty recommended</li>
+                                <li>Bring underwater breathing potions</li>
+                                <li>Fight near shore for escape routes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="strategies">
+                <h2>⚔️ Combat Strategies & General Tips</h2>
+                
+                <div class="alert alert-success">
+                    <strong>🎯 Universal Combat Principles:</strong> These strategies apply to fighting most dangerous creatures in the modpack.
+                </div>
+
+                <div class="creature-grid">
+                    <div class="creature-card">
+                        <div class="creature-header">
+                            <div class="creature-icon">🛡️</div>
+                            <div class="creature-info">
+                                <div class="creature-name">Defensive Strategies</div>
+                                <div class="creature-type">Survival Tactics</div>
+                            </div>
+                        </div>
+                        
+                        <div class="creature-description">
+                            Focus on survival and damage mitigation when facing overwhelming threats.
+                        </div>
+
+                        <div class="creature-abilities">
+                            <h4>🛡️ Defense Tactics</h4>
+                            <ul class="ability-list">
+                                <li>Always wear the best armor available</li>
+                                <li>Enchant with                            <div class="stat-item">
+                                <div class="stat-label">Location</div>
+                                <div class="stat-value">Abandoned Crypt</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Phases</div>
+                                <div class="stat-value">2</div>
+                            </div>
+                        </div>
+
+                        <div class="creature-abilities">
+                            <h4>💀 Special Abilities</h4>
+                            <ul class="ability-list">
+                                <li>Two-phase boss fight</li>
+                                <li>Stunning attacks that immobilize players</li>
+                                <li>Broken Armor effect (reduces armor effectiveness)</li>
+                                <li>Bleeding effect in second phase</li>
+                                <li>Heavy knockback attacks</li>
+                            </ul>
+                        </div>
+
+                        <div class="creature-loot">
+                            <h5>💎 Unique Drops</h5>
+                            <div class="loot-list">
+                                <span class="loot-item">Knight Summoner</span>
+                                <span class="loot-item">Guard Summoner</span>
+                                <span class="loot-item">Legendary Sword</span>
+                                <span class="loot-item">Heavy Armor</span>
+                            </div>
+                        </div>
+
+                        <div class="creature-tips">
+                            <h5>💡 Combat Tips</h5>
+                            <ul>
+                                <li>Bring multiple sets of armor</li>
+                                <li>Use ranged attacks when possible</li>
+                                <li>Prepare for long fight with healing items</li>
+                                <li>Watch for phase transition</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="creature-card boss" data-difficulty="5" data-type="boss">
+                        <div class="creature-header">
+                            <div class="creature-icon">🦖</div>
+                            <div class="creature-info">
+                                <div class="creature-name">Prehistoric Beast</div>
+                                <div class="creature-type">Boss Monster</div>
+                                <div class="creature-difficulty">
+                                    <span class="difficulty-label">Difficulty:</span>
+                                    <div class="difficulty-stars">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="creature-description">
+                            Ancient beast that lives in Soul Sand Valley. Creates devastating shockwaves and uses its massive tail as a weapon.
+                        </div>
+
+                        <div class="creature-stats">
+                            <div class="stat-item">
+                                <div class="stat-label">Health</div>
+                                <div class="stat-value">Massive</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Damage</div>
+                                <div class="stat-value">Extreme</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Location</div>
+                                <div class="stat-value">Soul Sand Valley</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Attacks</div>
+                                <div class="stat-value">AOE Shockwave</div>
+                            </div>
+                        </div>
+
+                        <div class="creature-abilities">
+                            <h4>💀 Special Abilities</h4>
+                            <ul class="ability-list">
+                                <li>Ground stomp creates shockwaves</li>
+                                <li>Tail sweep attacks</li>
+                                <li>Area-of-effect damage</li>
+                                <li>Extremely high health pool</li>
+                                <li>Knockback immunity</li>
+                            </ul>
+                        </div>
+
+                        <div class="creature-loot">
+                            <h5>💎 Unique Drops</h5>
+                            <div class="loot-list">
+                                <span class="loot-item">Prehistoric Scales</span>
+                                <span class="loot-item">Ancient Bones</span>
+                                <span class="loot-item">Shockwave Staff</span>
+                            </div>
+                        </div>
+
+                        <div class="creature-tips">
+                            <h5>💡 Combat Tips</h5>
+                            <ul>
+                                <li>Keep distance to avoid shockwaves</li>
+                                <li>Use ranged weapons exclusively</li>
+                                <li>Bring plenty of food and potions</li>
+                                <li>Watch for tail sweep patterns</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="creature-card boss" data-difficulty="4" data-type="boss">
+                        <div class="creature-header">
+                            <div class="creature-icon">🍄</div>
+                            <div class="creature-info">
+                                <div class="creature-name">Warped Fungussus</div>
+                                <div class="creature-type">Boss Monster</div>
+                                <div class="creature-difficulty">
+                                    <span class="difficulty-label">Difficulty:</span>
+                                    <div class="difficulty-stars">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star empty">★</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="creature-description">
+                            A warped mushroom-like entity that inhabits the Warped Forest. Teleports after attacking, making it difficult to pin down.
+                        </div>
+
+                        <div class="creature-stats">
+                            <div class="stat-item">
+                                <div class="stat-label">Health</div>
+                                <div class="stat-value">High</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Damage</div>
+                                <div class="stat-value">High</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Location</div>
+                                <div class="stat-value">Warped Forest</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Special</div>
+                                <div class="stat-value">Teleportation</div>
+                            </div>
+                        </div>
+
+                        <div class="creature-abilities">
+                            <h4>💀 Special Abilities</h4>
+                            <ul class="ability-list">
+                                <li>Teleports after each attack</li>
+                                <li>Spore cloud attacks</li>
+                                <li>Confusion effects</li>
+                                <li>Unpredictable movement</li>
+                            </ul>
+                        </div>
+
+                        <div class="creature-loot">
+                            <h5>💎 Unique Drops</h5>
+                            <div class="loot-list">
+                                <span class="loot-item">Warped Mushroom Cap</span>
+                                <span class="loot-item">Entity Warper</span>
+                                <span class="loot-item">Spore Sac</span>
+                            </div>
+                        </div>
+
+                        <div class="creature-tips">
+                            <h5>💡 Combat Tips</h5>
+                            <ul>
+                                <li>Predict teleportation patterns</li>
+                                <li>Use area-of-effect attacks</li>
+                                <li>Bring antidotes for spore effects</li>
+                                <li>Stay mobile during fight</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="legendary-creatures">
+                <h2>👹 Legendary Creatures</h2>
+                
+                <div class="creature-grid">
+                    <div class="creature-card legendary" data-difficulty="3" data-type="legendary">
+                        <div class="creature-header">
+                            <div class="creature-icon">🎃</div>
+                            <div class="creature-info">
+                                <div class="creature-name">Scarecrow</div>
+                                <div class="creature-type">Legendary Creature</div>
+                                <div class="creature-difficulty">
+                                    <span class="difficulty-label">Difficulty:</span>
+                                    <div class="difficulty-stars">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star empty">★</span>
+                                        <span class="star empty">★</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="creature-description">
+                            Aggressive mob that spawns when breaking crops. A cursed guardian of farmlands that punishes those who destroy harvests.
+                        </div>
+
+                        <div class="creature-stats">
+                            <div class="stat-item">
+                                <div class="stat-label">Health</div>
+                                <div class="stat-value">Medium</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Damage</div>
+                                <div class="stat-value">Medium</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Spawn</div>
+                                <div class="stat-value">Breaking Crops</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Speed</div>
+                                <div class="stat-value">Fast</div>
+                            </div>
+                        </div>
+
+                        <div class="creature-abilities">
+                            <h4>💀 Special Abilities</h4>
+                            <ul class="ability-list">
+                                <li>Fear effect on nearby players</li>
+                                <li>Fast movement speed</li>
+                                <li>Spawns from crop destruction</li>
+                                <li>Aggressive AI targeting</li>
+                            </ul>
+                        </div>
+
+                        <div class="creature-loot">
+                            <h5>💎 Potential Drops</h5>
+                            <div class="loot-list">
+                                <span class="loot-item">Straw</span>
+                                <span class="loot-item">Cursed Seeds</span>
+                                <span class="loot-item">Fear Essence</span>
+                            </div>
+                        </div>
+
+                        <div class="creature-tips">
+                            <h5>💡 Avoidance Tips</h5>
+                            <ul>
+                                <li>Use shears instead of breaking crops</li>
+                                <li>Fight with ranged weapons</li>
+                                <li>Don't farm alone early game</li>
+                                <li>Carry fear resistance potions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="creature-card legendary" data-difficulty="3" data-type="legendary">
+                        <div class="creature-header">
+                            <div class="creature-icon">🐺</div>
+                            <div class="creature-info">
+                                <div class="creature-name">Hound</div>
+                                <div class="creature-type">Legendary Creature</div>
+                                <div class="creature-difficulty">
+                                    <span class="difficulty-label">Difficulty:</span>
+                                    <div class="difficulty-stars">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star empty">★</span>
+                                        <span class="star empty">★</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="creature-description">
+                            Aggressive forest creature that charges at players and immobilizes them with its bite. Pack hunter with enhanced senses.
+                        </div>
+
+                        <div class="creature-stats">
+                            <div class="stat-item">
+                                <div class="stat-label">Health</div>
+                                <div class="stat-value">Medium</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Damage</div>
+                                <div class="stat-value">High</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Location</div>
+                                <div class="stat-value">Forests</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Special</div>
+                                <div class="stat-value">Immobilization</div>
+                            </div>
+                        </div>
+
+                        <div class="creature-abilities">
+                            <h4>💀 Special Abilities</h4>
+                            <ul class="ability-list">
+                                <li>Charging attack with knockdown</li>
+                                <li>Bite immobilizes players</li>
+                                <li>Pack hunting behavior</li>
+                                <li>Enhanced tracking abilities</li>
+                            </ul>
+                        </div>
+
+                        <div class="creature-loot">
+                            <h5>💎 Potential Drops</h5>
+                            <div class="loot-list">
+                                <span class="loot-item">Hound Fang</span>
+                                <span class="loot-item">Shadow Fur</span>
+                                <span class="loot-item">Tracking Essence</span>
+                            </div>
+                        </div>
+
+                        <div class="creature-tips">
+                            <h5>💡 Combat Tips</h5>
+                            <ul>
+                                <li>Avoid forests at night early game</li>
+                                <li>Use shields to block charges</li>
+                                <li>Climb trees to escape</li>
+                                <li>Bring freedom potions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="creature-card legendary" data-difficulty="2" data-type="legendary">
+                        <div class="creature-header">
+                            <div class="creature-icon">💫</div>
+                            <div class="creature-info">
+                                <div class="creature-name">Wisp</div>
+                                <div class="creature-type">Legendary Creature</div>
+                                <div class="creature-difficulty">
+                                    <span class="difficulty-label">Difficulty:</span>
+                                    <div class="difficulty-stars">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star empty">★</span>
+                                        <span class="star empty">★</span>
+                                        <span class="star empty">★</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="creature-description">
+                            Rare passive flying creature that drops valuable XP sacks on death. Variants exist in all dimensions with increasing rewards.
+                        </div>
+
+                        <div class="creature-stats">
+                            <div class="stat-item">
+                                <div class="stat-label">Health</div>
+                                <div class="stat-value">Low</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Damage</div>
+                                <div class="stat-value">None</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">XP Drop</div>
+                                <div class="stat-value">30-240</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Behavior</div>
+                                <div class="stat-value">Passive</div>
+                            </div>
+                        </div>
+
+                        <div class="creature-abilities">
+                            <h4>💀 Special Abilities</h4>
+                            <ul class="ability-list">
+                                <li>Flight and floating movement</li>
+                                <li>Rare spawn rates</li>
+                                <li>Dimensional variants</li>
+                                <li>XP sack drops on death</li>
+                            </ul>
+                        </div>
+
+                        <div class="creature-loot">
+                            <h5>💎 Dimensional Rewards</h5>
+                            <div class="loot-list">
+                                <span class="loot-item">Overworld: 30 XP</span>
+                                <span class="loot-item">Nether: 80 XP</span>
+                                <span class="loot-item">End: 240 XP</span>
+                            </div>
+                        </div>
+
+                        <div class="creature-tips">
+                            <h5>💡 Hunting Tips</h5>
+                            <ul>
+                                <li>Use ranged weapons for flying targets</li>
+                                <li>Hunt in End dimension for best XP</li>
+                                <li>Very rare - don't miss opportunities</li>
+                                <li>Passive - safe to approach</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="creature-card legendary" data-difficulty="3" data-type="legendary">
+                        <div class="creature-header">
+                            <div class="creature-icon">🦂</div>
+                            <div class="creature-info">
+                                <div class="creature-name">Scorpion</div>
+                                <div class="creature-type">Legendary Creature</div>
+                                <div class="creature-difficulty">
+                                    <span class="difficulty-label">Difficulty:</span>
+                                    <div class="difficulty-stars">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star empty">★</span>
+                                        <span class="star empty">★</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="creature-description">
+                            Aggressive desert creature that deals poison damage. Elite variants have double damage, health, and can carry baby scorpions.
+                        </div>
+
+                        <div class="creature-stats">
+                            <div class="stat-item">
+                                <div class="stat-label">Health</div>
+                                <div class="stat-value">Medium-High</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Damage</div>
+                                <div class="stat-value">Medium+Poison</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Location</div>
+                                <div class="stat-value">Deserts</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Special</div>
+                                <div class="stat-value">Poison Sting</div>
+                            </div>
+                        </div>
+
+                        <div class="creature-abilities">
+                            <h4>💀 Special Abilities</h4>
+                            <ul class="ability-list">
+                                <li>Poison sting attacks</li>
+                                <li>Baby scorpion spawning (variants)</li>
+                                <li>Fast movement in sand</li>
+                                <li>Elite variants with double stats</li>
+                            </ul>
+                        </div>
+
+                        <div class="creature-loot">
+                            <h5>💎 Potential Drops</h5>
+                            <div class="loot-list">
+                                <span class="loot-item">Scorpion Venom</span>
+                                <span class="loot-item">Chitin Plates</span>
+                                <span class="loot-item">Desert Essence</span>
+                            </div>
+                        </div>
+
+                        <div class="creature-tips">
+                            <h5>💡 Combat Tips</h5>
+                            <ul>
+                                <li>Bring milk or antidotes for poison</li>
+                                <li>Watch for baby scorpions</li>
+                                <li>Use ranged combat in deserts</li>
+                                <li>Elite variants are much stronger</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="graveyard">
+                <h2>🪦 Graveyard Creatures</h2>
+                
+                <div class="creature-grid">
+                    <div class="creature-card undead" data-difficulty="4" data-type="undead">
+                        <div class="creature-header">
+                            <div class="creature-icon">💀</div>
+                            <div class="creature-info">
+                                <div class="creature-name">Revenant</div>
+                                <div class="creature-type">Undead Elite</div>
+                                <div class="creature-difficulty">
+                                    <span class="difficulty-label">Difficulty:</span>
+                                    <div class="difficulty-stars">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star empty">★</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="creature-description">
+                            Powerful undead warriors that spawn in graveyard structures. Heavily armored and wielding cursed weapons with life-drain abilities.
+                        </div>
+
+                        <div class="creature-stats">
+                            <div class="stat-item">
+                                <div class="stat-label">Health</div>
+                                <div class="stat-value">Very High</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Damage</div>
+                                <div class="stat-value">High</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Location</div>
+                                <div class="stat-value">Graveyards</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Special</div>
+                                <div class="stat-value">Life Drain</div>
+                            </div>
+                        </div>
+
+                        <div class="creature-abilities">
+                            <h4>💀 Special Abilities</h4>
+                            <ul class="ability-list">
+                                <li>Life-draining attacks</li>
+                                <li>Heavy armor and weapons</li>
+                                <li>Undead immunities</li>
+                                <li>Curse effects on hit</li>
+                                <li>Regeneration in darkness</li>
+                            </ul>
+                        </div>
+
+                        <div class="creature-loot">
+                            <h5>💎 Unique Drops</h5>
+                            <div class="loot-list">
+                                <span class="loot-item">Cursed Armor</span>
+                                <span class="loot-item">Soul Gem</span>
+                                <span class="loot-item">Undead Essence</span>
+                                <span class="loot-item">Grave Dust</span>
+                            </div>
+                        </div>
+
+                        <div class="creature-tips">
+                            <h5>💡 Combat Tips</h5>
+                            <ul>
+                                <li>Use smite enchantments</li>
+                                <li>Bring healing potions</li>
+                                <li>Fight in daylight when possible</li>
+                                <li>Avoid curse effects</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="creature-card undead" data-difficulty="3" data-type="undead">
+                        <div class="creature-header">
+                            <div class="creature-icon">👻</div>
+                            <div class="creature-info">
+                                <div class="creature-name">Wraith</div>
+                                <div class="creature-type">Undead Spirit</div>
+                                <div class="creature-difficulty">
+                                    <span class="difficulty-label">Difficulty:</span>
+                                    <div class="difficulty-stars">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star empty">★</span>
+                                        <span class="star empty">★</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="creature-description">
+                            Ethereal undead spirits that can phase through walls and inflict terror effects. Difficult to hit with physical weapons.
+                        </div>
+
+                        <div class="creature-stats">
+                            <div class="stat-item">
+                                <div class="stat-label">Health</div>
+                                <div class="stat-value">Medium</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Damage</div>
+                                <div class="stat-value">Medium</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Location</div>
+                                <div class="stat-value">Haunted Areas</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Special</div>
+                                <div class="stat-value">Phasing</div>
+                            </div>
+                        </div>
+
+                        <div class="creature-abilities">
+                            <h4>💀 Special Abilities</h4>
+                            <ul class="ability-list">
+                                <li>Phase through walls</li>
+                                <li>Terror effect inducement</li>
+                                <li>Resistance to physical damage</li>
+                                <li>Teleportation abilities</li>
+                                <li>Invisibility phases</li>
+                            </ul>
+                        </div>
+
+                        <div class="creature-loot">
+                            <h5>💎 Unique Drops</h5>
+                            <div class="loot-list">
+                                <span class="loot-item">Ectoplasm</span>
+                                <span class="loot-item">Spirit Essence</span>
+                                <span class="loot-item">Ghostly Cloth</span>
+                            </div>
+                        </div>
+
+                        <div class="creature-tips">
+                            <h5>💡 Combat Tips</h5>
+                            <ul>
+                                <li>Use magical weapons</li>
+                                <li>Enchanted weapons work better</li>
+                                <li>Stay calm during terror effects</li>
+                                <li>Use area-of-effect attacks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="aquatic">
+                <h2>🌊 Aquatic Creatures</h2>
+                
+                <div class="creature-grid">
+                    <div class="creature-card aquatic" data-difficulty="4" data-type="aquatic">
+                        <div class="creature-header">
+                            <div class="creature-icon">🐙</div>
+                            <div class="creature-info">
+                                <div class="creature-name">Sea Serpent</div>
+                                <div class="creature-type">Aquatic Boss</div>
+                                <div class="creature-difficulty">
+                                    <span class="difficulty-label">Difficulty:</span>
+                                    <div class="difficulty-stars">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star empty">★</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="creature-description">
+                            Massive ocean predators that rule the seas. Can breach the surface and attack boats with devastating force.
+                        </div>
+
+                        <div class="creature-stats">
+                            <div class="stat-item">
+                                <div class="stat-label">Health</div>
+                                <div class="stat-value">Very High</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Damage</div>
+                                <div class="stat-value">Very High</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Location</div>
+                                <div class="stat-value">Deep Ocean</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Size</div>
+                                <div class="stat-value">Massive</div>
+                            </div>
+                        </div>
+
+                        <div class="creature-abilities">
+                            <h4>💀 Special Abilities</h4>
+                            <ul class="ability-list">
+                                <li>Boat-destroying attacks</li>
+                                <li>Breach and slam attacks</li>
+                                <li>Whirlpool creation</li>
+                                <li>Lightning breath underwater</li>
+                                <li>Massive size and reach</li>
+                            </ul>
+                        </div>
+
+                        <div class="creature-loot">
+                            <h5>💎 Unique Drops</h5>
+                            <div class="loot-list">
+                                <span class="loot-item">Sea Serpent Scales</span>
+                                <span class="loot-item">Tidal Trident</span>
+                                <span class="loot-item">Ocean Heart</span>
+                                <span class="loot-item">Storm Essence</span>
+                            </div>
+                        </div>
+
+                        <div class="creature-tips">
+                            <h5>💡 Combat Tips</h5>
+                            <ul>
+                                <li>Use strong boats or avoid ocean travel</li>
+                                <li>Respiration enchantments essential</li>
+                                <li>Trident with<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creatures Bestiary - Legendary Edition Wiki</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --gold-color: #f39c12;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --fire-color: #ff6b35;
+            --ice-color: #4ecdc4;
+            --lightning-color: #ffe66d;
+            --dark-color: #6c5ce7;
+            --text-light: #ecf0f1;
+            --text-dark: #2c3e50;
+            --bg-dark: #1a1a1a;
+            --bg-medium: #2c2c2c;
+            --bg-light: #f8f9fa;
+            --shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --dragon-gradient: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+
+        /* Header */
+        .header {
+            background: var(--dragon-gradient);
+            color: var(--text-light);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="scales" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M5,0 Q10,5 5,10 Q0,5 5,0" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23scales)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--primary-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .toc {
+            list-style: none;
+        }
+
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc a {
+            color: var(--text-dark);
+            text-decoration: none;
+            padding: 0.5rem;
+            display: block;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc a:hover, .toc a.active {
+            background: var(--bg-light);
+            border-left-color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .toc a.active {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* Filters */
+        .filters {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-group label {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        .filter-select, .search-input {
+            padding: 0.5rem;
+            border: 2px solid var(--bg-light);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .filter-select:focus, .search-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .search-input {
+            width: 250px;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .main-content h1 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 1rem;
+        }
+
+        .main-content h2 {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem 0;
+            font-size: 1.8rem;
+            position: relative;
+        }
+
+        .main-content h2::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 100%;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* Creature Cards */
+        .creature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .creature-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 5px solid;
+        }
+
+        .creature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .creature-card:hover::before {
+            left: 100%;
+        }
+
+        .creature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        /* Creature Types */
+        .creature-card.dragon { border-left-color: var(--fire-color); }
+        .creature-card.legendary { border-left-color: var(--gold-color); }
+        .creature-card.boss { border-left-color: var(--danger-color); }
+        .creature-card.undead { border-left-color: var(--dark-color); }
+        .creature-card.nature { border-left-color: var(--success-color); }
+        .creature-card.aquatic { border-left-color: var(--ice-color); }
+
+        .creature-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .creature-icon {
+            font-size: 3rem;
+            padding: 1rem;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            flex-shrink: 0;
+        }
+
+        .creature-info {
+            flex: 1;
+        }
+
+        .creature-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .creature-type {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .creature-difficulty {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .difficulty-label {
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .difficulty-stars {
+            display: flex;
+            gap: 0.2rem;
+        }
+
+        .star {
+            color: var(--gold-color);
+            font-size: 1.2rem;
+        }
+
+        .star.empty {
+            color: #ddd;
+        }
+
+        .creature-description {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .creature-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-item {
+            background: var(--bg-light);
+            padding: 0.75rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .creature-abilities {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border: 2px solid var(--bg-light);
+        }
+
+        .creature-abilities h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .ability-list {
+            list-style: none;
+        }
+
+        .ability-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .ability-list li::before {
+            content: '⚡';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .creature-loot {
+            background: var(--success-color);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .creature-loot h5 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .loot-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .loot-item {
+            background: rgba(255,255,255,0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .creature-tips {
+            background: var(--warning-color);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .creature-tips h5 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .creature-tips ul {
+            list-style: none;
+        }
+
+        .creature-tips li {
+            margin-bottom: 0.25rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .creature-tips li::before {
+            content: '💡';
+            position: absolute;
+            left: 0;
+        }
+
+        /* Special Sections */
+        .dragon-section {
+            background: var(--dragon-gradient);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dragon-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="flames" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M10,20 Q5,10 10,0 Q15,10 10,20" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23flames)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .dragon-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .dragon-section h2 {
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .dragon-section h2::before {
+            background: white;
+        }
+
+        .dragon-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .dragon-type {
+            background: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .dragon-type:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+
+        .dragon-type.fire {
+            border-color: var(--fire-color);
+        }
+
+        .dragon-type.ice {
+            border-color: var(--ice-color);
+        }
+
+        .dragon-type.lightning {
+            border-color: var(--lightning-color);
+        }
+
+        .dragon-type h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .dragon-type p {
+            color: rgba(255,255,255,0.9);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .dragon-stages {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .dragon-stages h4 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .stage-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1rem;
+        }
+
+        .stage-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stage-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .stage-health {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Alert Boxes */
+        .alert {
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-left-color: var(--warning-color);
+            color: #856404;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            border-left-color: var(--danger-color);
+            color: #721c24;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-left-color: var(--success-color);
+            color: #155724;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border-left-color: #17a2b8;
+            color: #0c5460;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .sidebar {
+                position: static;
+                order: 2;
+            }
+
+            .main-content {
+                padding: 2rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .creature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dragon-types {
+                grid-template-columns: 1fr;
+            }
+
+            .stage-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-input {
+                width: 100%;
+            }
+        }
+
+        /* Animations */
+        .creature-card {
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .creature-card:nth-child(1) { animation-delay: 0.1s; }
+        .creature-card:nth-child(2) { animation-delay: 0.2s; }
+        .creature-card:nth-child(3) { animation-delay: 0.3s; }
+        .creature-card:nth-child(4) { animation-delay: 0.4s; }
+        .creature-card:nth-child(5) { animation-delay: 0.5s; }
+        .creature-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Search highlighting */
+        .highlight {
+            background: yellow;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>🐲 Creatures Bestiary</h1>
+            <p>Complete guide to all dangerous and legendary creatures in the modpack</p>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">
+                <strong>📚 Wiki Navigation</strong>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="getting-started.html">🚀 Getting Started</a></li>
+                <li><a href="mods.html">🔮 Mods</a></li>
+                <li><a href="skills.html">⚔️ Skills</a></li>
+                <li><a href="creatures.html">🐲 Creatures</a></li>
+                <li><a href="guides.html">📖 Guides</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>📋 Table of Contents</h3>
+            <ul class="toc">
+                <li><a href="#overview">📊 Overview</a></li>
+                <li><a href="#dragons">🐉 Dragons</a></li>
+                <li><a href="#legendary-monsters">👑 Legendary Monsters</a></li>
+                <li><a href="#legendary-creatures">👹 Legendary Creatures</a></li>
+                <li><a href="#graveyard">🪦 Graveyard Mobs</a></li>
+                <li><a href="#aquatic">🌊 Aquatic Creatures</a></li>
+                <li><a href="#strategies">⚔️ Combat Strategies</a></li>
+            </ul>
+
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="search">🔍 Search</label>
+                    <input type="text" id="search" class="search-input" placeholder="Search creatures...">
+                </div>
+                
+                <div class="filter-group">
+                    <label for="difficulty">💀 Difficulty</label>
+                    <select id="difficulty" class="filter-select">
+                        <option value="all">All Difficulties</option>
+                        <option value="1">⭐ Beginner</option>
+                        <option value="2">⭐⭐ Easy</option>
+                        <option value="3">⭐⭐⭐ Medium</option>
+                        <option value="4">⭐⭐⭐⭐ Hard</option>
+                        <option value="5">⭐⭐⭐⭐⭐ Extreme</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="type">🏷️ Type</label>
+                    <select id="type" class="filter-select">
+                        <option value="all">All Types</option>
+                        <option value="dragon">Dragons</option>
+                        <option value="legendary">Legendary</option>
+                        <option value="boss">Boss</option>
+                        <option value="undead">Undead</option>
+                        <option value="nature">Nature</option>
+                        <option value="aquatic">Aquatic</option>
+                    </select>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <h1>Creatures Bestiary</h1>
+            
+            <div class="alert alert-danger">
+                <strong>⚠️ Danger Warning:</strong> The creatures in this modpack are significantly more dangerous than vanilla Minecraft. Many can kill unprepared players instantly. Always approach with caution and proper equipment!
+            </div>
+
+            <section id="overview">
+                <h2>📊 Creature Overview</h2>
+                
+                <p>The Legendary Edition features over 50 unique creatures from various mods, each with their own behaviors, abilities, and loot. Understanding these creatures is crucial for survival and progression.</p>
+
+                <div class="alert alert-info">
+                    <strong>💡 Difficulty Scale:</strong><br>
+                    ⭐ - Beginner (can be fought early game)<br>
+                    ⭐⭐ - Easy (iron gear recommended)<br>
+                    ⭐⭐⭐ - Medium (diamond gear required)<br>
+                    ⭐⭐⭐⭐ - Hard (enchanted gear + strategy)<br>
+                    ⭐⭐⭐⭐⭐ - Extreme (endgame preparation required)
+                </div>
+            </section>
+
+            <section id="dragons" class="dragon-section">
+                <div class="dragon-content">
+                    <h2>🐉 Dragons - Ice and Fire</h2>
+                    
+                    <p>The most iconic and dangerous creatures in the modpack. Dragons are apex predators that rule the skies and can devastate unprepared players.</p>
+
+                    <div class="dragon-types">
+                        <div class="dragon-type fire">
+                            <h4>🔥 Fire Dragons</h4>
+                            <p>Breathe deadly fire and roam most habitable biomes. Found in surface roosts (Stages 1-3) and underground caves (Stages 4-5).</p>
+                            <p><strong>Spawn:</strong> Temperature > -0.5 (most biomes except jungles, savannas, badlands)</p>
+                        </div>
+
+                        <div class="dragon-type ice">
+                            <h4>❄️ Ice Dragons</h4>
+                            <p>Freeze their prey to death and inhabit the coldest regions. Ice breath can instantly kill unprepared players.</p>
+                            <p><strong>Spawn:</strong> Cold biomes like tundra, ice plains, and snowy mountains</p>
+                        </div>
+
+                        <div class="dragon-type lightning">
+                            <h4>⚡ Lightning Dragons</h4>
+                            <p>Nocturnal predators that deal devastating electrical damage. The rarest and most powerful dragon type.</p>
+                            <p><strong>Spawn:</strong> Rare spawns in various biomes, active primarily at night</p>
+                        </div>
+                    </div>
+
+                    <div class="dragon-stages">
+                        <h4>🎯 Dragon Stages & Health</h4>
+                        <div class="stage-grid">
+                            <div class="stage-item">
+                                <div class="stage-number">1</div>
+                                <div class="stage-health">20-102 HP</div>
+                            </div>
+                            <div class="stage-item">
+                                <div class="stage-number">2</div>
+                                <div class="stage-health">116-208 HP</div>
+                            </div>
+                            <div class="stage-item">
+                                <div class="stage-number">3</div>
+                                <div class="stage-health">212-304 HP</div>
+                            </div>
+                            <div class="stage-item">
+                                <div class="stage-number">4</div>
+                                <div class="stage-health">308-400 HP</div>
+                            </div>
+                            <div class="stage-item">
+                                <div class="stage-number">5</div>
+                                <div class="stage-health">404-500 HP</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-danger" style="background: rgba(231, 76, 60, 0.2); border-left-color: white; color: white;">
+                        <strong>🚨 Critical Warning:</strong> Stage 4-5 dragons are endgame threats that require the best equipment, enchantments, and careful strategy. Do not attempt without proper preparation!
+                    </div>
+                </div>
+            </section>
+
+            <section id="legendary-monsters">
+                <h2>👑 Legendary Monsters</h2>
+                
+                <div class="creature-grid">
+                    <div class="creature-card boss" data-difficulty="5" data-type="boss">
+                        <div class="creature-header">
+                            <div class="creature-icon">👹</div>
+                            <div class="creature-info">
+                                <div class="creature-name">Possessed Paladin</div>
+                                <div class="creature-type">Boss Monster</div>
+                                <div class="creature-difficulty">
+                                    <span class="difficulty-label">Difficulty:</span>
+                                    <div class="difficulty-stars">
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                        <span class="star">★</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="creature-description">
+                            A massive living armor wielding a netherite sword. Has two phases with stunning attacks and can apply Broken Armor and Bleeding effects.
+                        </div>
+
+                        <div class="creature-stats">
+                            <div class="stat-item">
+                                <div class="stat-label">Health</div>
+                                <div class="stat-value">Very High</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Damage</div>
+                                <div class="stat-value">Extreme</div>
+                            </div>
+                            <div class="stat-item">
+                
