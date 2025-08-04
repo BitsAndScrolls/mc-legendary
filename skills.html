@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills Guide - Legendary Edition Wiki</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #e74c3c;
+            --gold-color: #f39c12;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --magic-color: #9b59b6;
+            --text-light: #ecf0f1;
+            --text-dark: #2c3e50;
+            --bg-dark: #1a1a1a;
+            --bg-medium: #2c2c2c;
+            --bg-light: #f8f9fa;
+            --shadow: 0 4px 20px rgba(0,0,0,0.1);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --magic-gradient: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: var(--bg-light);
+        }
+
+        /* Header */
+        .header {
+            background: var(--gradient);
+            color: var(--text-light);
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--primary-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .toc {
+            list-style: none;
+        }
+
+        .toc li {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc a {
+            color: var(--text-dark);
+            text-decoration: none;
+            padding: 0.5rem;
+            display: block;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .toc a:hover, .toc a.active {
+            background: var(--bg-light);
+            border-left-color: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .toc a.active {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .main-content h1 {
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 1rem;
+        }
+
+        .main-content h2 {
+            color: var(--primary-color);
+            margin: 2rem 0 1rem 0;
+            font-size: 1.8rem;
+            position: relative;
+        }
+
+        .main-content h2::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 100%;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .main-content h3 {
+            color: var(--primary-color);
+            margin: 1.5rem 0 1rem 0;
+            font-size: 1.3rem;
+        }
+
+        .main-content p {
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Skill Cards */
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-card:hover::before {
+            left: 100%;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .skill-card.mining { border-left-color: #8b4513; }
+        .skill-card.defense { border-left-color: #4682b4; }
+        .skill-card.attack { border-left-color: #dc143c; }
+        .skill-card.magic { border-left-color: var(--magic-color); }
+        .skill-card.building { border-left-color: #daa520; }
+        .skill-card.gathering { border-left-color: #228b22; }
+        .skill-card.farming { border-left-color: #9acd32; }
+        .skill-card.agility { border-left-color: #ff6347; }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            padding: 1rem;
+            border-radius: 15px;
+            background: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .skill-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .skill-description {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .skill-levels {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .skill-levels h4 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .level-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .level-item:last-child {
+            border-bottom: none;
+        }
+
+        .level-number {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .level-unlock {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* XP Tips */
+        .xp-tips {
+            background: var(--success-color);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .xp-tips h5 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .xp-tips ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .xp-tips li {
+            margin-bottom: 0.25rem;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .xp-tips li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Magic Section */
+        .magic-section {
+            background: var(--magic-gradient);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .magic-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>') repeat;
+            opacity: 0.5;
+        }
+
+        .magic-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .magic-section h2 {
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .magic-section h2::before {
+            background: white;
+        }
+
+        .magic-schools {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .magic-school {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .magic-school:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+
+        .magic-school h4 {
+            color: white;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .magic-school p {
+            color: rgba(255,255,255,0.9);
+            line-height: 1.5;
+        }
+
+        /* Build Comparison */
+        .build-comparison {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .build-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .build-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .build-card.survival::before { background: var(--success-color); }
+        .build-card.magic::before { background: var(--magic-color); }
+        .build-card.combat::before { background: var(--danger-color); }
+        .build-card.balanced::before { background: var(--gold-color); }
+
+        .build-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .build-title {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .build-priority {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+        }
+
+        .build-priority h5 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .priority-list {
+            list-style: none;
+            counter-reset: priority-counter;
+        }
+
+        .priority-list li {
+            counter-increment: priority-counter;
+            margin-bottom: 0.5rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .priority-list li::before {
+            content: counter(priority-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--accent-color);
+            color: white;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Alert Boxes */
+        .alert {
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-left-color: var(--warning-color);
+            color: #856404;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            border-left-color: var(--danger-color);
+            color: #721c24;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-left-color: var(--success-color);
+            color: #155724;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border-left-color: #17a2b8;
+            color: #0c5460;
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 8px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: var(--accent-color);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .sidebar {
+                position: static;
+                order: 2;
+            }
+
+            .main-content {
+                padding: 2rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .skill-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .magic-schools {
+                grid-template-columns: 1fr;
+            }
+
+            .build-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .skill-card {
+            animation: fadeInUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .skill-card:nth-child(1) { animation-delay: 0.1s; }
+        .skill-card:nth-child(2) { animation-delay: 0.2s; }
+        .skill-card:nth-child(3) { animation-delay: 0.3s; }
+        .skill-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>⚔️ Skills & Progression</h1>
+        <p>Master the Reskillable system and Iron's Spellbooks magic progression</p>
+    </header>
+
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">
+                <strong>📚 Wiki Navigation</strong>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">🏠 Home</a></li>
+                <li><a href="getting-started.html">🚀 Getting Started</a></li>
+                <li><a href="mods.html">🔮 Mods</a></li>
+                <li><a href="skills.html">⚔️ Skills</a></li>
+                <li><a href="creatures.html">🐲 Creatures</a></li>
+                <li><a href="guides.html">📖 Guides</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h3>📋 Table of Contents</h3>
+            <ul class="toc">
+                <li><a href="#overview">📊 Overview</a></li>
+                <li><a href="#reskillable">🎯 Reskillable Skills</a></li>
+                <li><a href="#magic-system">🔮 Magic System</a></li>
+                <li><a href="#builds">⚖️ Build Guides</a></li>
+                <li><a href="#progression">📈 Progression Tips</a></li>
+                <li><a href="#advanced">🏆 Advanced Strategies</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <h1>Skills & Progression Guide</h1>
+            
+            <div class="alert alert-info">
+                <strong>💡 Key Concept:</strong> The Legendary Edition uses a gated progression system where equipment and abilities are locked behind skill levels. You must strategically allocate XP to unlock the tools and items you need.
+            </div>
+
+            <section id="overview">
+                <h2>📊 System Overview</h2>
+                
+                <p>The Legendary Edition features two primary progression systems:</p>
+                
+                <div class="build-comparison">
+                    <div class="build-card">
+                        <h3>🎯 Reskillable System</h3>
+                        <p><strong>8 Core Skills</strong> that gate equipment and abilities. You must level these up with XP to use better tools, weapons, and armor.</p>
+                        <ul>
+                            <li>Equipment gating system</li>
+                            <li>XP-based progression</li>
+                            <li>Trait unlocks at higher levels</li>
+                            <li>Strategic specialization required</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="build-card">
+                        <h3>🔮 Magic Progression</h3>
+                        <p><strong>Iron's Spellbooks</strong> with dynamic skill trees for different schools of magic. Gain power through spell usage and specialization.</p>
+                        <ul>
+                            <li>Spell-based XP system</li>
+                            <li>School specialization</li>
+                            <li>Progressive power scaling</li>
+                            <li>Multiple magic trees</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="reskillable">
+                <h2>🎯 Reskillable Skills System</h2>
+                
+                <div class="alert alert-warning">
+                    <strong>⚠️ Important:</strong> You cannot use equipment above your skill level! Plan your progression carefully and spend XP immediately on priority skills.
+                </div>
+
+                <div class="skill-grid">
+                    <div class="skill-card mining">
+                        <div class="skill-header">
+                            <div class="skill-icon">⛏️</div>
+                            <div class="skill-title">Mining</div>
+                        </div>
+                        <div class="skill-description">
+                            Controls access to pickaxes and mining equipment. Essential for resource gathering and progression.
+                        </div>
+                        <div class="skill-levels">
+                            <h4>Key Unlocks:</h4>
+                            <div class="level-item">
+                                <span class="level-number">1</span>
+                                <span class="level-unlock">Stone Pickaxe</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">8</span>
+                                <span class="level-unlock">Iron Pickaxe</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">16</span>
+                                <span class="level-unlock">Diamond Pickaxe</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">24</span>
+                                <span class="level-unlock">Netherite Pickaxe</span>
+                            </div>
+                        </div>
+                        <div class="xp-tips">
+                            <h5>💡 XP Sources:</h5>
+                            <ul>
+                                <li>Breaking stone and ore blocks</li>
+                                <li>Strip mining at diamond level</li>
+                                <li>Mining any blocks with pickaxes</li>
+                                <li>Breaking mineral blocks</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="skill-card defense">
+                        <div class="skill-header">
+                            <div class="skill-icon">🛡️</div>
+                            <div class="skill-title">Defense</div>
+                        </div>
+                        <div class="skill-description">
+                            Unlocks armor and defensive equipment. Critical for surviving the dangerous creatures in this modpack.
+                        </div>
+                        <div class="skill-levels">
+                            <h4>Key Unlocks:</h4>
+                            <div class="level-item">
+                                <span class="level-number">1</span>
+                                <span class="level-unlock">Leather Armor</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">12</span>
+                                <span class="level-unlock">Iron Armor</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">16</span>
+                                <span class="level-unlock">Diamond Armor</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">24</span>
+                                <span class="level-unlock">Netherite Armor</span>
+                            </div>
+                        </div>
+                        <div class="xp-tips">
+                            <h5>💡 XP Sources:</h5>
+                            <ul>
+                                <li>Taking damage while wearing armor</li>
+                                <li>Blocking attacks with shields</li>
+                                <li>Using defensive abilities</li>
+                                <li>Surviving dangerous encounters</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="skill-card attack">
+                        <div class="skill-header">
+                            <div class="skill-icon">⚔️</div>
+                            <div class="skill-title">Attack</div>
+                        </div>
+                        <div class="skill-description">
+                            Controls weapons and combat equipment. Essential for combat builds and Spartan Weaponry items.
+                        </div>
+                        <div class="skill-levels">
+                            <h4>Key Unlocks:</h4>
+                            <div class="level-item">
+                                <span class="level-number">1</span>
+                                <span class="level-unlock">Stone Weapons</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">8</span>
+                                <span class="level-unlock">Iron Weapons</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">12</span>
+                                <span class="level-unlock">Spartan Weapons</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">16</span>
+                                <span class="level-unlock">Diamond Weapons</span>
+                            </div>
+                        </div>
+                        <div class="xp-tips">
+                            <h5>💡 XP Sources:</h5>
+                            <ul>
+                                <li>Killing mobs with weapons</li>
+                                <li>Dealing damage in combat</li>
+                                <li>Using weapon special abilities</li>
+                                <li>Successful critical hits</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="skill-card magic">
+                        <div class="skill-header">
+                            <div class="skill-icon">🔮</div>
+                            <div class="skill-title">Magic</div>
+                        </div>
+                        <div class="skill-description">
+                            Unlocks magical equipment and spellcasting items. Required for Iron's Spellbooks progression.
+                        </div>
+                        <div class="skill-levels">
+                            <h4>Key Unlocks:</h4>
+                            <div class="level-item">
+                                <span class="level-number">8</span>
+                                <span class="level-unlock">Basic Magic Items</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">12</span>
+                                <span class="level-unlock">Enchanting Table</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">15</span>
+                                <span class="level-unlock">Advanced Spells</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">20</span>
+                                <span class="level-unlock">Master Magic Items</span>
+                            </div>
+                        </div>
+                        <div class="xp-tips">
+                            <h5>💡 XP Sources:</h5>
+                            <ul>
+                                <li>Casting spells successfully</li>
+                                <li>Using magical items</li>
+                                <li>Enchanting equipment</li>
+                                <li>Brewing potions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="skill-card building">
+                        <div class="skill-header">
+                            <div class="skill-icon">🏗️</div>
+                            <div class="skill-title">Building</div>
+                        </div>
+                        <div class="skill-description">
+                            Controls access to advanced building materials and construction items.
+                        </div>
+                        <div class="skill-levels">
+                            <h4>Key Unlocks:</h4>
+                            <div class="level-item">
+                                <span class="level-number">4</span>
+                                <span class="level-unlock">Stone Bricks</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">8</span>
+                                <span class="level-unlock">Iron Blocks</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">12</span>
+                                <span class="level-unlock">Decorative Blocks</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">16</span>
+                                <span class="level-unlock">Advanced Materials</span>
+                            </div>
+                        </div>
+                        <div class="xp-tips">
+                            <h5>💡 XP Sources:</h5>
+                            <ul>
+                                <li>Placing building blocks</li>
+                                <li>Crafting construction items</li>
+                                <li>Building structures</li>
+                                <li>Using building tools</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="skill-card gathering">
+                        <div class="skill-header">
+                            <div class="skill-icon">🌳</div>
+                            <div class="skill-title">Gathering</div>
+                        </div>
+                        <div class="skill-description">
+                            Controls axes, shovels, and gathering tools. Essential for resource collection and efficiency.
+                        </div>
+                        <div class="skill-levels">
+                            <h4>Key Unlocks:</h4>
+                            <div class="level-item">
+                                <span class="level-number">1</span>
+                                <span class="level-unlock">Stone Tools</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">8</span>
+                                <span class="level-unlock">Iron Tools</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">16</span>
+                                <span class="level-unlock">Diamond Tools</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">20</span>
+                                <span class="level-unlock">Efficiency Tools</span>
+                            </div>
+                        </div>
+                        <div class="xp-tips">
+                            <h5>💡 XP Sources:</h5>
+                            <ul>
+                                <li>Chopping trees with axes</li>
+                                <li>Digging with shovels</li>
+                                <li>Harvesting plants and crops</li>
+                                <li>Breaking natural blocks</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="skill-card farming">
+                        <div class="skill-header">
+                            <div class="skill-icon">🌾</div>
+                            <div class="skill-title">Farming</div>
+                        </div>
+                        <div class="skill-description">
+                            Controls agricultural tools and advanced farming techniques. Important for food production.
+                        </div>
+                        <div class="skill-levels">
+                            <h4>Key Unlocks:</h4>
+                            <div class="level-item">
+                                <span class="level-number">1</span>
+                                <span class="level-unlock">Basic Crops</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">4</span>
+                                <span class="level-unlock">Advanced Seeds</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">8</span>
+                                <span class="level-unlock">Farming Tools</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">12</span>
+                                <span class="level-unlock">Automation Items</span>
+                            </div>
+                        </div>
+                        <div class="xp-tips">
+                            <h5>💡 XP Sources:</h5>
+                            <ul>
+                                <li>Planting and harvesting crops</li>
+                                <li>Breeding animals</li>
+                                <li>Using farming tools</li>
+                                <li>Growing and harvesting trees</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="skill-card agility">
+                        <div class="skill-header">
+                            <div class="skill-icon">🏃</div>
+                            <div class="skill-title">Agility</div>
+                        </div>
+                        <div class="skill-description">
+                            Controls movement-related items and abilities. Affects mobility and traversal options.
+                        </div>
+                        <div class="skill-levels">
+                            <h4>Key Unlocks:</h4>
+                            <div class="level-item">
+                                <span class="level-number">4</span>
+                                <span class="level-unlock">Speed Items</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">8</span>
+                                <span class="level-unlock">Climbing Gear</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">12</span>
+                                <span class="level-unlock">Advanced Movement</span>
+                            </div>
+                            <div class="level-item">
+                                <span class="level-number">16</span>
+                                <span class="level-unlock">Flight Items</span>
+                            </div>
+                        </div>
+                        <div class="xp-tips">
+                            <h5>💡 XP Sources:</h5>
+                            <ul>
+                                <li>Running and sprinting</li>
+                                <li>Jumping and climbing</li>
+                                <li>Using movement abilities</li>
+                                <li>Dodging and evasion</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="magic-system" class="magic-section">
+                <div class="magic-content">
+                    <h2>🔮 Iron's Spellbooks Magic System</h2>
+                    
+                    <p>The magic system features dynamic skill trees that grow with your magical power. You progress through four main stages of magical mastery.</p>
+
+                    <div class="alert alert-info" style="background: rgba(255,255,255,0.2); border-left-color: white; color: white;">
+                        <strong>🎯 Progression Path:</strong> Magic I → Primary School → Secondary School → Magic II
+                    </div>
+
+                    <h3>📚 Magic Schools</h3>
+                    <div class="magic-schools">
+                        <div class="magic-school">
+                            <h4>🔥 Fire Magic</h4>
+                            <p>Offensive spells focusing on damage and burning effects. Excellent for combat and area control.</p>
+                        </div>
+
+                        <div class="magic-school">
+                            <h4>❄️ Ice Magic</h4>
+                            <p>Control and defensive spells with freezing effects. Good for crowd control and protection.</p>
+                        </div>
+
+                        <div class="magic-school">
+                            <h4>⚡ Lightning Magic</h4>
+                            <p>Fast, precise electrical attacks with chain effects. High damage potential and mobility.</p>
+                        </div>
+
+                        <div class="magic-school">
+                            <h4>🌿 Nature Magic</h4>
+                            <p>Healing, growth, and environmental manipulation. Support-focused with utility spells.</p>
+                        </div>
+
+                        <div class="magic-school">
+                            <h4>🌪️ Evocation Magic</h4>
+                            <p>Pure magical force and energy manipulation. Versatile combat applications.</p>
+                        </div>
+
+                        <div class="magic-school">
+                            <h4>🔮 Eldritch Magic</h4>
+                            <p>Dark, powerful magic with unique effects. High-risk, high-reward spellcasting.</p>
+                        </div>
+                    </div>
+
+                    <h3>📈 Magic Progression Stages</h3>
+                    <div class="build-comparison" style="margin-top: 2rem;">
+                        <div class="build-card" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
+                            <h4 style="color: white;">Stage 1: Magic I</h4>
+                            <p style="color: rgba(255,255,255,0.9);">
+                                <strong>Time:</strong> 16-40 hours<br>
+                                <strong>Focus:</strong> General magical abilities<br>
+                                <strong>Unlocks:</strong> Basic spell power, mana, and regeneration
+                            </p>
+                        </div>
+
+                        <div class="build-card" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
+                            <h4 style="color: white;">Stage 2: Primary School</h4>
+                            <p style="color: rgba(255,255,255,0.9);">
+                                <strong>Time:</strong> 12-30 hours<br>
+                                <strong>Focus:</strong> Specialize in one magic school<br>
+                                <strong>Unlocks:</strong> +20% power in chosen school
+                            </p>
+                        </div>
+
+                        <div class="build-card" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
+                            <h4 style="color: white;">Stage 3: Secondary School</h4>
+                            <p style="color: rgba(255,255,255,0.9);">
+                                <strong>Time:</strong> 12-30 hours<br>
+                                <strong>Focus:</strong> Add a second specialization<br>
+                                <strong>Unlocks:</strong> +15% power in second school
+                            </p>
+                        </div>
+
+                        <div class="build-card" style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px);">
+                            <h4 style="color: white;">Stage 4: Magic II</h4>
+                            <p style="color: rgba(255,255,255,0.9);">
+                                <strong>Time:</strong> 18-48 hours<br>
+                                <strong>Focus:</strong> Master-level abilities<br>
+                                <strong>Unlocks:</strong> Ultimate magical mastery
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-success" style="background: rgba(39, 174, 96, 0.2); border-left-color: white; color: white; margin-top: 2rem;">
+                        <strong>✨ Maximum Buffs Available:</strong><br>
+                        • Spell Power: +38-44%<br>
+                        • Spell Resist: +30-39%<br>
+                        • Cooldown Reduction: +30-39%<br>
+                        • Max Mana: +165-195<br>
+                        • Mana Regen: +29%
+                    </div>
+                </div>
+            </section>
+
+            <section id="builds">
+                <h2>⚖️ Skill Build Guides</h2>
+                
+                <div class="alert alert-warning">
+                    <strong>⚠️ Build Planning:</strong> You cannot respec skills easily! Choose your build carefully and stick to the priority order for optimal progression.
+                </div>
+
+                <div class="build-comparison">
+                    <div class="build-card survival">
+                        <div class="build-title">🛡️ Survival Focus Build</div>
+                        <p><strong>Best for:</strong> New players, steady progression, safe exploration</p>
+                        
+                        <div class="build-priority">
+                            <h5>Priority Order:</h5>
+                            <ol class="priority-list">
+                                <li><strong>Mining (1→16):</strong> Resource gathering foundation</li>
+                                <li><strong>Defense (1→12):</strong> Iron armor for survival</li>
+                                <li><strong>Attack (1→10):</strong> Basic combat capability</li>
+                                <li><strong>Gathering (1→8):</strong> Tool efficiency</li>
+                            </ol>
+                        </div>
+
+                        <div class="xp-tips">
+                            <h5>🎯 Strategy:</h5>
+                            <ul>
+                                <li>Mine constantly for XP and resources</li>
+                                <li>Avoid dangerous areas until equipped</li>
+                                <li>Focus on infrastructure building</li>
+                                <li>Gradual, steady progression</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="build-card magic">
+                        <div class="build-title">🔮 Magic Specialist Build</div>
+                        <p><strong>Best for:</strong> Players wanting to focus on spellcasting and magical combat</p>
+                        
+                        <div class="build-priority">
+                            <h5>Priority Order:</h5>
+                            <ol class="priority-list">
+                                <li><strong>Magic (1→15):</strong> Unlock spellcasting</li>
+                                <li><strong>Defense (1→10):</strong> Basic protection</li>
+                                <li><strong>Attack (1→6):</strong> Emergency weapons</li>
+                                <li><strong>Mining (1→10):</strong> Resource needs</li>
+                            </ol>
+                        </div>
+
+                        <div class="xp-tips">
+                            <h5>🎯 Strategy:</h5>
+                            <ul>
+                                <li>Rush magic levels for early spells</li>
+                                <li>Focus on Iron's Spellbooks progression</li>
+                                <li>Prioritize mana and spell power</li>
+                                <li>Specialize in 1-2 magic schools</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="build-card combat">
+                        <div class="build-title">⚔️ Combat Specialist Build</div>
+                        <p><strong>Best for:</strong> Dragon hunters, creature fighters, combat-focused players</p>
+                        
+                        <div class="build-priority">
+                            <h5>Priority Order:</h5>
+                            <ol class="priority-list">
+                                <li><strong>Attack (1→20):</strong> All weapons unlocked</li>
+                                <li><strong>Defense (1→16):</strong> Diamond armor</li>
+                                <li><strong>Mining (1→12):</strong> Material needs</li>
+                                <li><strong>Magic (1→8):</strong> Enchanting access</li>
+                            </ol>
+                        </div>
+
+                        <div class="xp-tips">
+                            <h5>🎯 Strategy:</h5>
+                            <ul>
+                                <li>Rush attack for Spartan weapons</li>
+                                <li>Hunt creatures for XP and loot</li>
+                                <li>Focus on melee combat mastery</li>
+                                <li>Prepare for dragon encounters</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="build-card balanced">
+                        <div class="build-title">⚖️ Balanced Explorer Build</div>
+                        <p><strong>Best for:</strong> Experienced players wanting flexibility and exploration</p>
+                        
+                        <div class="build-priority">
+                            <h5>Strategy:</h5>
+                            <ol class="priority-list">
+                                <li><strong>Phase 1:</strong> All skills to level 8</li>
+                                <li><strong>Phase 2:</strong> Mining → Defense priority</li>
+                                <li><strong>Phase 3:</strong> Attack → Magic specialization</li>
+                                <li><strong>Phase 4:</strong> Situational progression</li>
+                            </ol>
+                        </div>
+
+                        <div class="xp-tips">
+                            <h5>🎯 Strategy:</h5>
+                            <ul>
+                                <li>Broad initial development</li>
+                                <li>Adapt based on discoveries</li>
+                                <li>Flexible progression path</li>
+                                <li>Multiple backup options</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="progression">
+                <h2>📈 Advanced Progression Tips</h2>
+                
+                <h3>🎯 XP Efficiency Strategies</h3>
+                <div class="skill-grid">
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon">⚡</div>
+                            <div class="skill-title">XP Farming Techniques</div>
+                        </div>
+                        <div class="skill-description">
+                            <strong>Mining:</strong> Create strip mines at Y=11 for maximum stone breaking<br>
+                            <strong>Combat:</strong> Build mob farms or hunt in dungeons<br>
+                            <strong>Magic:</strong> Practice spells on peaceful mobs<br>
+                            <strong>Defense:</strong> Controlled damage taking with healing
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon">🎯</div>
+                            <div class="skill-title">Skill Synergies</div>
+                        </div>
+                        <div class="skill-description">
+                            <strong>Mining + Gathering:</strong> Complete resource gathering suite<br>
+                            <strong>Attack + Defense:</strong> Combat survivability<br>
+                            <strong>Magic + Attack:</strong> Spell-sword hybrid<br>
+                            <strong>Building + Farming:</strong> Base development focus
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon">⏰</div>
+                            <div class="skill-title">Timing Considerations</div>
+                        </div>
+                        <div class="skill-description">
+                            <strong>Early Game:</strong> Focus 2-3 skills maximum<br>
+                            <strong>Mid Game:</strong> Specialize based on build<br>
+                            <strong>Late Game:</strong> Fill out supporting skills<br>
+                            <strong>End Game:</strong> Maximize all relevant skills
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon">🚫</div>
+                            <div class="skill-title">Common Mistakes</div>
+                        </div>
+                        <div class="skill-description">
+                            <strong>Spreading too thin:</strong> Avoid leveling all skills equally<br>
+                            <strong>Hoarding XP:</strong> Spend immediately on priorities<br>
+                            <strong>Wrong priorities:</strong> Don't rush high-level items early<br>
+                            <strong>Ignoring defense:</strong> Survivability is crucial
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="advanced">
+                <h2>🏆 Advanced Strategies</h2>
+                
+                <h3>🔄 Mid-Game Transitions</h3>
+                <div class="alert alert-info">
+                    <strong>💡 Transition Timing:</strong> Most builds should transition focus around days 10-15 when basic infrastructure is established.
+                </div>
+
+                <div class="build-comparison">
+                    <div class="build-card">
+                        <h4>🔄 Survival → Combat Transition</h4>
+                        <p><strong>When:</strong> After reaching Mining 16, Defense 12</p>
+                        <p><strong>Next Steps:</strong> Push Attack to 16-20 for legendary creature hunting</p>
+                        <p><strong>Goal:</strong> Become a dragon hunter</p>
+                    </div>
+
+                    <div class="build-card">
+                        <h4>🔄 Survival → Magic Transition</h4>
+                        <p><strong>When:</strong> After reaching Mining 12, Defense 10</p>
+                        <p><strong>Next Steps:</strong> Rush Magic to 15, start spell progression</p>
+                        <p><strong>Goal:</strong> Become a powerful mage</p>
+                    </div>
+                </div>
+
+                <h3>🎭 Hybrid Builds</h3>
+                <div class="skill-grid">
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon">🗡️</div>
+                            <div class="skill-title">Spell-Sword Build</div>
+                        </div>
+                        <div class="skill-description">
+                            Combine magic and melee combat for versatile gameplay.
+                            <br><strong>Priority:</strong> Magic 15 → Attack 16 → Defense 12
+                            <br><strong>Playstyle:</strong> Weapon enchantments + combat spells
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <div class="skill-icon">🏹</div>
+                            <div class="skill-title">Ranger Build</div>
+                        </div>
+                        <div class="skill-description">
+                            Focus on ranged combat and survival skills.
+                            <br><strong>Priority:</strong> Attack 12 → Agility 12 → Gathering 16
+                            <br><strong>Playstyle:</strong> Bows, mobility, resource gathering
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>🎯 Endgame Goals:</strong> By day 30+, you should have at least 3-4 skills at level 16+ and be able to tackle dragons, legendary creatures, and major dungeon complexes. Plan your progression to reach these milestones efficiently!
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Highlight current section in TOC
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const tocLinks = document.querySelectorAll('.toc a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all skill cards
+        document.querySelectorAll('.skill-card, .build-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Add hover effects for skill cards
+        document.querySelectorAll('.skill-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>
